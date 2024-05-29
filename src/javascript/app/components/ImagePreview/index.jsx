@@ -6,18 +6,80 @@ import applyBitmapFilter from '../../../../tools/applyBitmapFilter';
 
 function ImagePreview({
   baseValues,
+  channel,
 }) {
   const canvas = useRef(null);
   const originalCanvas = useRef(null);
 
   const [imageData, orderPatterns] = useSelector((state) => [state.imageData, state.orderPatterns]);
 
+  const splitRGBChannels = (imgData) => {
+    const channelsData = {
+      red: {}, green: {}, blue: {},
+    };
+
+    const data = imgData.data;
+    ['red', 'green', 'blue'].forEach((color, index) => {
+      const channelCanvas = document.createElement('canvas');
+      channelCanvas.width = imgData.width;
+      channelCanvas.height = imgData.height;
+      const ctx = channelCanvas.getContext('2d');
+      const channelData = new ImageData(imgData.width, imgData.height);
+
+      for (let i = 0; i < imgData.data.length; i += 4) {
+        const value = data[i + index]; // Get the value of the current channel
+        channelData.data[i] = value; // Red
+        channelData.data[i + 1] = value; // Green
+        channelData.data[i + 2] = value; // Blue
+        channelData.data[i + 3] = data[i + 3]; // Alpha
+      }
+
+      ctx.putImageData(channelData, 0, 0);
+
+      channelsData[color] = ctx.getImageData(0, 0, imgData.width, imgData.height);
+
+    });
+
+    return channelsData;
+  };
+
+  const getChannel = (imgData) => {
+
+    const { red, green, blue } = splitRGBChannels(imgData);
+
+    switch (channel) {
+      case 'R':
+
+        return red;
+
+      case 'G':
+
+        return green;
+
+      case 'B':
+
+        return blue;
+
+      case 'All':
+
+        return imgData;
+
+      case 'Result':
+        // TODO: Change
+        return imgData;
+      default:
+
+        return imgData;
+    }
+  };
+
+
   useEffect(() => {
     if (canvas.current && originalCanvas.current) {
       applyBitmapFilter({
         targetCanvas: canvas.current,
         originalCanvas: originalCanvas.current,
-        imageData: imageData.imageData,
+        imageData: getChannel(imageData.imageData), // imageData.imageData,
         orderPatterns,
         baseValues,
       });
@@ -55,6 +117,7 @@ function ImagePreview({
 
 ImagePreview.propTypes = {
   baseValues: PropTypes.array.isRequired,
+  channel: PropTypes.string.isRequired,
 };
 
 ImagePreview.defaultProps = {};

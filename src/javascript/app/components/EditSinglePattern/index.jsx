@@ -15,6 +15,23 @@ function EditSinglePattern() {
     >
       <ImagePreview
         baseValues={generateBaseValues(baseValues)}
+        channel="All"
+      />
+      <ImagePreview
+        baseValues={generateBaseValues(baseValues)}
+        channel="R"
+      />
+      <ImagePreview
+        baseValues={generateBaseValues(baseValues)}
+        channel="G"
+      />
+      <ImagePreview
+        baseValues={generateBaseValues(baseValues)}
+        channel="B"
+      />
+      <ImagePreview
+        baseValues={generateBaseValues(baseValues)}
+        channel="Result"
       />
       <BaseValues
         baseValues={baseValues}
