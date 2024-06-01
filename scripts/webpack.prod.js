@@ -13,7 +13,7 @@ module.exports = merge(common(), {
     maxAssetSize: 500000,
   },
   plugins: [
-    new EnvironmentPlugin({ PUBLIC_URL: 'https://maddoscientisto.github.io/color-dither-gbfier/' }),
+    new EnvironmentPlugin({ PUBLIC_URL: 'https://maddoscientisto.github.io/color-dither-gbfier' }),
     new CopyPlugin({
       patterns: [
         {
