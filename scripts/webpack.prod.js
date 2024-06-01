@@ -28,6 +28,10 @@ module.exports = merge(common(), {
           from: path.join(process.cwd(), 'src', 'assets', 'manifest.webmanifest'),
           to: path.join(process.cwd(), 'dist', 'manifest.webmanifest'),
         },
+        {
+          from: path.join(process.cwd(), 'src', 'assets', 'pwa-assets'),
+          to: path.join(process.cwd(), 'dist', 'pwa-assets'),
+        },
       ],
     }),
   ],
