@@ -5,6 +5,7 @@ import BaseValues from '../BaseValues';
 import OrderValuesSet from '../OrderValuesSet';
 import generateBaseValues from '../../../../generateBaseValues.mjs';
 import SingleCodePreview from '../SingleCodePreview';
+import Collapsible from '../Collapsible';
 
 function EditSinglePattern() {
   const [baseValues, setBaseValues] = useState([0x01, 0x55, 0xAA, 0xFF]);
@@ -17,21 +18,24 @@ function EditSinglePattern() {
         baseValues={generateBaseValues(baseValues)}
         channel="All"
       />
-      <p>Red</p>
-      <ImagePreview
-        baseValues={generateBaseValues(baseValues)}
-        channel="R"
-      />
-      <p>Green</p>
-      <ImagePreview
-        baseValues={generateBaseValues(baseValues)}
-        channel="G"
-      />
-      <p>Blue</p>
-      <ImagePreview
-        baseValues={generateBaseValues(baseValues)}
-        channel="B"
-      />
+      <Collapsible title="Color Channels">
+        <p>Red</p>
+        <ImagePreview
+          baseValues={generateBaseValues(baseValues)}
+          channel="R"
+        />
+        <p>Green</p>
+        <ImagePreview
+          baseValues={generateBaseValues(baseValues)}
+          channel="G"
+        />
+        <p>Blue</p>
+        <ImagePreview
+          baseValues={generateBaseValues(baseValues)}
+          channel="B"
+        />
+      </Collapsible>
+
       <p>Merged</p>
       <ImagePreview
         baseValues={generateBaseValues(baseValues)}
