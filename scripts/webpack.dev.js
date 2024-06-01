@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const { merge } = require('webpack-merge');
+const { EnvironmentPlugin } = require('webpack');
 const setupServer = require('./setupServer');
 const common = require('./webpack.common');
 
@@ -22,6 +23,7 @@ module.exports = merge(common(), {
     moduleIds: 'named',
   },
   plugins: [
+    new EnvironmentPlugin({ PUBLIC_URL: 'http://localhost:3000/' }),
     new webpack.NoEmitOnErrorsPlugin(),
   ],
 });
