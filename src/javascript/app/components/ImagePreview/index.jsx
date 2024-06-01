@@ -67,6 +67,13 @@ function ImagePreview({
     }
   });
 
+  const handleDownload = () => {
+    const link = document.createElement('a');
+    link.download = `${imageData.fileName}-dithered.png`;
+    link.href = canvas.current.toDataURL();
+    link.click();
+  };
+
   if (!orderPatterns?.length || !imageData?.width || !imageData?.height) {
     return null;
   }
@@ -86,12 +93,21 @@ function ImagePreview({
       >
         →
       </span>
-      <canvas
-        className="image-preview__canvas"
-        width={width}
-        height={height}
-        ref={canvas}
-      />
+      <div className="canvas-container">
+        <canvas
+          className="image-preview__canvas"
+          width={width}
+          height={height}
+          ref={canvas}
+        />
+        <button
+          type="button"
+          className="canvas-container__download-btn"
+          onClick={handleDownload}
+        >
+          ⬇️
+        </button>
+      </div>
     </div>
   );
 }

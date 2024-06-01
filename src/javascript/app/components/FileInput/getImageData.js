@@ -129,6 +129,7 @@ const getImageData = (file) => (
         scaleFactor: scaledOriginalCanvas.scaleFactor,
         width: srcCanvas.width,
         height: srcCanvas.height,
+        
       });
     };
 

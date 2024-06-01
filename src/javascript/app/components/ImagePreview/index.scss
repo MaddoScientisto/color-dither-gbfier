@@ -10,4 +10,29 @@
     line-height: 30px;
     font-size: 26px;
   }
+  
+  .canvas-container {
+    position: relative;
+    display: inline-block;
+  }
+
+  .canvas-container__download-btn {
+    position: absolute;
+    right: 2px;
+    bottom: 4px;
+    padding: 4px 4px;
+    background: rgba(255, 255, 255, 0.8); // white with semi-transparency
+    color: black;
+    border: 1px solid black; // thin black border
+    border-radius: 5px;
+    opacity: 0.5; // start with low opacity
+    transition: opacity 0.3s ease; // smooth transition for opacity change
+    cursor: pointer;
+    font-size: 16px; // adjust size as needed
+
+    &:hover {
+      opacity: 1;
+      background: rgba(255, 255, 255, 0.9); // slightly less transparent on hover
+    }
+  }
 }

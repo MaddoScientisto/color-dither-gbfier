@@ -11,12 +11,13 @@ function FileInput() {
   const onChange = async ({ target: inputField }) => {
     if (inputField.files.length) {
       console.log(1, Date.now());
-      const blob = new Blob([new Uint8Array(await inputField.files[0].arrayBuffer())]);
+      const file = inputField.files[0];
+      const blob = new Blob([new Uint8Array(await file.arrayBuffer())]);
       getImageData(blob)
         .then((imageData) => {
           dispatch({
             type: SET_IMAGE_DATA,
-            payload: imageData,
+            payload: { fileName: file.name, ...imageData },
           });
         });
     } else {
