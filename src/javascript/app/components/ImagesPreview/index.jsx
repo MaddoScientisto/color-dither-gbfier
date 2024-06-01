@@ -14,6 +14,7 @@ function ImagesPreview({
     <div className="images-preview">
       <ImagePreview
         baseValues={baseValues[activePatternIndex]}
+        channel="All"
       />
       <div className="images-preview__buttons">
         { baseValues?.map((_, index) => (

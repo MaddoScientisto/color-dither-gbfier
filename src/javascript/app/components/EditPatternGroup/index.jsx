@@ -45,7 +45,6 @@ function EditPatternGroup() {
     >
       <ImagesPreview
         baseValues={baseValues}
-        channel="All"
       />
       <PatternPreview
         groupBaseValues={baseValues}

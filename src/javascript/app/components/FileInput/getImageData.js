@@ -119,29 +119,6 @@ const getImageData = (file) => (
 
       const scaledOriginalCanvasColor = scale(img, srcCanvas, context, false);
 
-      // let scaleFactor;
-      // const srcWidth = img.naturalWidth;
-      // const srcHeight = img.naturalHeight;
-      // const ratio = srcHeight / srcWidth;
-
-      // // let channelsData = {};
-      // // const channelsData = splitRGBChannels(context.getImageData(0, 0, srcCanvas.width, srcCanvas.height), ratio, img);
-
-      // // if an image has the ratio of the "sensor" resolution of 128x112, import it inside of a frame
-      // if (ratio === 112 / 128) {
-      //   srcCanvas.height = 144;
-      //   scaleFactor = img.naturalWidth / 128;
-      //   prepareContext(context);
-      //   context.drawImage(img, 0, 0, srcWidth, srcHeight, 16, 16, srcCanvas.width - 32, srcCanvas.height - 32);
-      // } else {
-      //   srcCanvas.height = srcCanvas.width * srcHeight / srcWidth;
-      //   scaleFactor = srcWidth / 160;
-      //   prepareContext(context);
-      //   context.drawImage(img, 0, 0, srcWidth, srcHeight, 0, 0, srcCanvas.width, srcCanvas.height);
-      // }
-
-      // const imageData = context.getImageData(0, 0, srcCanvas.width, srcCanvas.height);
-
       const imageData = scaledOriginalCanvas.imageData;
 
       const channelsData = splitRGBChannels(scaledOriginalCanvasColor.canvas, scaledOriginalCanvasColor.context);
