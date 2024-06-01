@@ -8,7 +8,7 @@
             "type": "image/x-icon"
         },
         {
-            "src": "/pwa-assets/manifest-icon-512.maskable.png",
+            "src": "/color-dither-gbfier/pwa-assets/manifest-icon-512.maskable.png",
             "type": "image/png",
             "sizes": "512x512"
         }
