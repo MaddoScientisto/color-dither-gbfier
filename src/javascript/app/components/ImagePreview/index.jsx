@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import './index.scss';
 import applyBitmapFilter from '../../../../tools/applyBitmapFilter';
+import applyRGBMerge from '../../../../tools/applyRGBMerge';
 
 function ImagePreview({
   baseValues,
@@ -43,10 +44,10 @@ function ImagePreview({
   //   return channelsData;
   // };
 
-  const getChannel = (imgData) => {
+  const getChannel = (imgData, chnl) => {
     const { red, green, blue } = imgData.channelsData; // splitRGBChannels(imgData);
 
-    switch (channel) {
+    switch (chnl) {
       case 'R':
 
         return red;
@@ -75,13 +76,24 @@ function ImagePreview({
 
   useEffect(() => {
     if (canvas.current && originalCanvas.current) {
-      applyBitmapFilter({
-        targetCanvas: canvas.current,
-        originalCanvas: originalCanvas.current,
-        imageData: getChannel(imageData), // imageData.imageData,
-        orderPatterns,
-        baseValues,
-      });
+      if (channel !== 'Result') {
+        applyBitmapFilter({
+          targetCanvas: canvas.current,
+          originalCanvas: originalCanvas.current,
+          imageData: getChannel(imageData, channel), // imageData.imageData,
+          orderPatterns,
+          baseValues,
+        });
+      } else {
+        applyRGBMerge({
+          targetCanvas: canvas.current,
+          originalCanvas: originalCanvas.current,
+          imageData: imageData.imageData, // imageData.imageData,
+          channelsData: imageData.channelsData,
+          orderPatterns,
+          baseValues,
+        });
+      }
     }
   });
 

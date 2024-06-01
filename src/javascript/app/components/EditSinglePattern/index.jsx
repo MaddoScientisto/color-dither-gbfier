@@ -17,18 +17,22 @@ function EditSinglePattern() {
         baseValues={generateBaseValues(baseValues)}
         channel="All"
       />
+      <p>Red</p>
       <ImagePreview
         baseValues={generateBaseValues(baseValues)}
         channel="R"
       />
+      <p>Green</p>
       <ImagePreview
         baseValues={generateBaseValues(baseValues)}
         channel="G"
       />
+      <p>Blue</p>
       <ImagePreview
         baseValues={generateBaseValues(baseValues)}
         channel="B"
       />
+      <p>Merged</p>
       <ImagePreview
         baseValues={generateBaseValues(baseValues)}
         channel="Result"

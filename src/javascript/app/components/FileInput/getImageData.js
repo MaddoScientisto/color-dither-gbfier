@@ -111,11 +111,6 @@ const getImageData = (file) => (
 
     const context = srcCanvas.getContext('2d');
 
-    const channelsSrcCanvas = document.createElement('canvas');
-    channelsSrcCanvas.width = 160;
-
-    const channelsContext = channelsSrcCanvas.getContext('2d');
-
     img.onerror = reject;
 
     img.onload = () => {
