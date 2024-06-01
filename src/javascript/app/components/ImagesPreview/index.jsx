@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './index.scss';
 import ImagePreview from '../ImagePreview';
+import Collapsible from '../Collapsible';
+
 
 function ImagesPreview({
   baseValues,
@@ -13,6 +15,29 @@ function ImagesPreview({
       <ImagePreview
         baseValues={baseValues[activePatternIndex]}
         channel="All"
+      />
+      <Collapsible title="Color Channels">
+        <p>Red</p>
+        <ImagePreview
+          baseValues={baseValues[activePatternIndex]}
+          channel="R"
+        />
+        <p>Green</p>
+        <ImagePreview
+          baseValues={baseValues[activePatternIndex]}
+          channel="G"
+        />
+        <p>Blue</p>
+        <ImagePreview
+          baseValues={baseValues[activePatternIndex]}
+          channel="B"
+        />
+      </Collapsible>
+
+      <p>Merged</p>
+      <ImagePreview
+        baseValues={baseValues[activePatternIndex]}
+        channel="Result"
       />
       <div className="images-preview__buttons">
         { baseValues?.map((_, index) => (
