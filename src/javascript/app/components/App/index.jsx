@@ -17,7 +17,7 @@ function App() {
             className="app__doc-link"
             target="_blank"
             rel="noreferrer"
-            href="https://github.com/HerrZatacke/dither-pattern-gen"
+            href="https://github.com/maddoscientisto/color-dither-gbfier"
           >
             [Docs]
           </a>
