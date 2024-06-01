@@ -8,8 +8,6 @@ function ImagesPreview({
 }) {
   const [activePatternIndex, setActivePatternIndex] = useState(Math.floor(baseValues.length / 2));
 
-  // const { width, height } = imageData;
-
   return (
     <div className="images-preview">
       <ImagePreview
