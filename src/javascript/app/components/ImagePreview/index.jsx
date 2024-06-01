@@ -88,10 +88,31 @@ function ImagePreview({
 
   }
 
-  const handleDownload = () => {
+  const handleDownload = (scale = 1) => {
+    let downloadCanvas = canvas.current;
+
+    if (scale !== 1) {
+      // Create a new canvas only if magnification is needed
+      downloadCanvas = document.createElement('canvas');
+      const context = downloadCanvas.getContext('2d');
+
+      // Set the dimensions of the new canvas
+      downloadCanvas.width = canvas.current.width * scale;
+      downloadCanvas.height = canvas.current.height * scale;
+
+      context.imageSmoothingEnabled = false; // Disabling smoothing
+      context.mozImageSmoothingEnabled = false; // For Firefox
+      context.webkitImageSmoothingEnabled = false; // For Safari/Chrome
+      context.msImageSmoothingEnabled = false; // For IE
+
+      // Scale and draw the original canvas onto the new canvas
+      context.scale(scale, scale);
+      context.drawImage(canvas.current, 0, 0);
+    }
+
     const link = document.createElement('a');
-    link.download = appendToFilename(imageData.fileName, `_${channel}`);
-    link.href = canvas.current.toDataURL();
+    link.download = appendToFilename(imageData.fileName, `_${channel}${scale !== 1 ? `_x${scale}` : ''}`);
+    link.href = downloadCanvas.toDataURL();
     link.click();
   };
 
@@ -124,9 +145,18 @@ function ImagePreview({
         <button
           type="button"
           className="canvas-container__download-btn"
-          onClick={handleDownload}
+          onClick={() => handleDownload(1)}
         >
           ⬇️
+        </button>
+        <button
+          type="button"
+          className="canvas-container__download-btn"
+          style={{ right: '38px' }} // Adjust position to avoid overlap with the original download button
+          onClick={() => handleDownload(4)}
+          title="Download 4x Magnified"
+        >
+          x4
         </button>
       </div>
     </div>
