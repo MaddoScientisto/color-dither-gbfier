@@ -13,39 +13,38 @@ function ImagePreview({
 
   const [imageData, orderPatterns] = useSelector((state) => [state.imageData, state.orderPatterns]);
 
-  const splitRGBChannels = (imgData) => {
-    const channelsData = {
-      red: {}, green: {}, blue: {},
-    };
+  // const splitRGBChannels = (imgData) => {
+  //   // const channelsData = {
+  //   //   red: {}, green: {}, blue: {},
+  //   // };
 
-    const data = imgData.data;
-    ['red', 'green', 'blue'].forEach((color, index) => {
-      const channelCanvas = document.createElement('canvas');
-      channelCanvas.width = imgData.width;
-      channelCanvas.height = imgData.height;
-      const ctx = channelCanvas.getContext('2d');
-      const channelData = new ImageData(imgData.width, imgData.height);
+  //   const data = imgData.data;
+  //   ['red', 'green', 'blue'].forEach((color, index) => {
+  //     const channelCanvas = document.createElement('canvas');
+  //     channelCanvas.width = imgData.width;
+  //     channelCanvas.height = imgData.height;
+  //     const ctx = channelCanvas.getContext('2d');
+  //     const channelData = new ImageData(imgData.width, imgData.height);
 
-      for (let i = 0; i < imgData.data.length; i += 4) {
-        const value = data[i + index]; // Get the value of the current channel
-        channelData.data[i] = value; // Red
-        channelData.data[i + 1] = value; // Green
-        channelData.data[i + 2] = value; // Blue
-        channelData.data[i + 3] = data[i + 3]; // Alpha
-      }
+  //     for (let i = 0; i < imgData.data.length; i += 4) {
+  //       const value = data[i + index]; // Get the value of the current channel
+  //       channelData.data[i] = value; // Red
+  //       channelData.data[i + 1] = value; // Green
+  //       channelData.data[i + 2] = value; // Blue
+  //       channelData.data[i + 3] = data[i + 3]; // Alpha
+  //     }
 
-      ctx.putImageData(channelData, 0, 0);
+  //     ctx.putImageData(channelData, 0, 0);
 
-      channelsData[color] = ctx.getImageData(0, 0, imgData.width, imgData.height);
+  //     channelsData[color] = ctx.getImageData(0, 0, imgData.width, imgData.height);
 
-    });
+  //   });
 
-    return channelsData;
-  };
+  //   return channelsData;
+  // };
 
   const getChannel = (imgData) => {
-
-    const { red, green, blue } = splitRGBChannels(imgData);
+    const { red, green, blue } = imgData.channelsData; // splitRGBChannels(imgData);
 
     switch (channel) {
       case 'R':
@@ -62,14 +61,14 @@ function ImagePreview({
 
       case 'All':
 
-        return imgData;
+        return imgData.imageData;
 
       case 'Result':
         // TODO: Change
-        return imgData;
+        return imgData.imageData;
       default:
 
-        return imgData;
+        return imgData.imageData;
     }
   };
 
@@ -79,7 +78,7 @@ function ImagePreview({
       applyBitmapFilter({
         targetCanvas: canvas.current,
         originalCanvas: originalCanvas.current,
-        imageData: getChannel(imageData.imageData), // imageData.imageData,
+        imageData: getChannel(imageData), // imageData.imageData,
         orderPatterns,
         baseValues,
       });
