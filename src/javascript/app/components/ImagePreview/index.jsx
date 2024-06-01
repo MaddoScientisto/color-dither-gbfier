@@ -67,9 +67,30 @@ function ImagePreview({
     }
   });
 
+  /**
+ * Appends a string to the filename before its extension.
+ *
+ * @param {string} filename - The original filename.
+ * @param {string} suffix - The string to append to the filename.
+ * @returns {string} - The modified filename.
+ */
+  function appendToFilename(filename, suffix) {
+  // Find the last dot to determine where the extension starts
+    const dotIndex = filename.lastIndexOf('.');
+    // Check if there's a valid extension
+    if (dotIndex !== -1) {
+      // Insert the suffix before the dot (extension)
+      return filename.substring(0, dotIndex) + suffix + filename.substring(dotIndex);
+    }
+
+    // No extension found, append the suffix to the end
+    return filename + suffix;
+
+  }
+
   const handleDownload = () => {
     const link = document.createElement('a');
-    link.download = `${imageData.fileName}-dithered.png`;
+    link.download = appendToFilename(imageData.fileName, `_${channel}`);
     link.href = canvas.current.toDataURL();
     link.click();
   };
