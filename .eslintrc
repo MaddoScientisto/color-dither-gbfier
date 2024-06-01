@@ -56,12 +56,7 @@
     "eol-last": "warn",
     "no-alert": "warn",
     "no-loop-func": "error",
-    "no-param-reassign": [
-      "error",
-      {
-        "props": true
-      }
-    ],
+    "no-param-reassign": "off",
     "padded-blocks": "off",
     "no-prototype-builtins": "off",
     "no-restricted-syntax": "off",
