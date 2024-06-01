@@ -35,6 +35,7 @@ function ImagePreview({
         return imgData.imageData;
 
       case 'Result':
+      case 'RGBResult':
         // TODO: Change
         return imgData.imageData;
       default:
@@ -46,7 +47,7 @@ function ImagePreview({
 
   useEffect(() => {
     if (canvas.current && originalCanvas.current) {
-      if (channel !== 'Result') {
+      if (channel !== 'Result' && channel !== 'RGBResult') {
         applyBitmapFilter({
           targetCanvas: canvas.current,
           originalCanvas: originalCanvas.current,
@@ -164,7 +165,7 @@ function ImagePreview({
 }
 
 ImagePreview.propTypes = {
-  baseValues: PropTypes.array.isRequired,
+  baseValues: PropTypes.any.isRequired, // .array.isRequired,
   channel: PropTypes.string.isRequired,
 };
 

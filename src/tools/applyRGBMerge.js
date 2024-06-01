@@ -45,7 +45,7 @@ const applyRGBMerge = ({
     originalCanvas: tempCanvas,
     imageData: channelsData.red,
     orderPatterns,
-    baseValues,
+    baseValues: baseValues.red ? baseValues.red : baseValues,
   });
 
   applyBitmapFilter({
@@ -53,7 +53,7 @@ const applyRGBMerge = ({
     originalCanvas: tempCanvas,
     imageData: channelsData.green,
     orderPatterns,
-    baseValues,
+    baseValues: baseValues.green ? baseValues.green : baseValues,
   });
 
   applyBitmapFilter({
@@ -61,7 +61,7 @@ const applyRGBMerge = ({
     originalCanvas: tempCanvas,
     imageData: channelsData.blue,
     orderPatterns,
-    baseValues,
+    baseValues: baseValues.blue ? baseValues.blue : baseValues,
   });
 
   const mergedImageData = mergeRGBChannels({

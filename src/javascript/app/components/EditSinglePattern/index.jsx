@@ -9,44 +9,82 @@ import Collapsible from '../Collapsible';
 
 function EditSinglePattern() {
   const [baseValues, setBaseValues] = useState([0x01, 0x55, 0xAA, 0xFF]);
+  const [redBaseValues, setRedBaseValues] = useState([0x01, 0x55, 0xAA, 0xFF]);
+  const [greenBaseValues, setGreenBaseValues] = useState([0x01, 0x55, 0xAA, 0xFF]);
+  const [blueBaseValues, setBlueBaseValues] = useState([0x01, 0x55, 0xAA, 0xFF]);
 
   return (
     <div
       className="edit-single-pattern"
     >
+      <p>Monochrome</p>
       <ImagePreview
         baseValues={generateBaseValues(baseValues)}
         channel="All"
       />
-      <Collapsible title="Color Channels">
-        <p>Red</p>
-        <ImagePreview
-          baseValues={generateBaseValues(baseValues)}
-          channel="R"
-        />
-        <p>Green</p>
-        <ImagePreview
-          baseValues={generateBaseValues(baseValues)}
-          channel="G"
-        />
-        <p>Blue</p>
-        <ImagePreview
-          baseValues={generateBaseValues(baseValues)}
-          channel="B"
-        />
-      </Collapsible>
 
-      <p>Merged</p>
+      <p>Merged Color channels</p>
       <ImagePreview
         baseValues={generateBaseValues(baseValues)}
         channel="Result"
       />
+
       <BaseValues
         baseValues={baseValues}
         onBaseValuesUpdate={setBaseValues}
       />
-      <OrderValuesSet />
-      <SingleCodePreview baseValues={baseValues} />
+
+      <Collapsible title="Color Channels finetuning">
+        <Collapsible title="Red">
+          <ImagePreview
+            baseValues={generateBaseValues(redBaseValues)}
+            channel="R"
+          />
+          <BaseValues
+            baseValues={redBaseValues}
+            onBaseValuesUpdate={setRedBaseValues}
+          />
+        </Collapsible>
+        <Collapsible title="Green">
+          <p>Green</p>
+          <ImagePreview
+            baseValues={generateBaseValues(greenBaseValues)}
+            channel="G"
+          />
+          <BaseValues
+            baseValues={greenBaseValues}
+            onBaseValuesUpdate={setGreenBaseValues}
+          />
+        </Collapsible>
+        <Collapsible title="Blue">
+          <p>Blue</p>
+          <ImagePreview
+            baseValues={generateBaseValues(blueBaseValues)}
+            channel="B"
+          />
+          <BaseValues
+            baseValues={blueBaseValues}
+            onBaseValuesUpdate={setBlueBaseValues}
+          />
+        </Collapsible>
+
+        <p>Merged Color channels</p>
+        <ImagePreview
+          baseValues={{
+            red: generateBaseValues(redBaseValues),
+            green: generateBaseValues(greenBaseValues),
+            blue: generateBaseValues(blueBaseValues),
+          }}
+          channel="RGBResult"
+        />
+
+      </Collapsible>
+
+      <Collapsible title="Extra Settings">
+        <OrderValuesSet />
+        <SingleCodePreview baseValues={baseValues} />
+      </Collapsible>
+
     </div>
   );
 }
