@@ -55,9 +55,9 @@ const splitRGBChannels = (canvas, context) => {
     return nc;
   });
 
-  const redCtx = channelsCanvas[0].getContext('2d');
-  const greenCtx = channelsCanvas[1].getContext('2d');
-  const blueCtx = channelsCanvas[2].getContext('2d');
+  const redCtx = channelsCanvas[0].getContext('2d', { willReadFrequently: true });
+  const greenCtx = channelsCanvas[1].getContext('2d', { willReadFrequently: true });
+  const blueCtx = channelsCanvas[2].getContext('2d', { willReadFrequently: true });
 
   redCtx.putImageData(redChannelData, 0, 0);
   greenCtx.putImageData(greenChannelData, 0, 0);
@@ -78,6 +78,7 @@ const scale = (img, canvas, context, applyFilter) => {
 
   const newCanvas = canvas;
   const newContext = context;
+
   // if an image has the ratio of the "sensor" resolution of 128x112, import it inside of a frame
   if (ratio === 112 / 128) {
     newCanvas.height = 144;
@@ -109,7 +110,7 @@ const getImageData = (file) => (
     const srcCanvas = document.createElement('canvas');
     srcCanvas.width = 160;
 
-    const context = srcCanvas.getContext('2d');
+    const context = srcCanvas.getContext('2d', { willReadFrequently: true });
 
     img.onerror = reject;
 
