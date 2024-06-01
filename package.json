@@ -89,5 +89,8 @@
     "last 4 versions",
     "Firefox ESR",
     "not ie < 11"
-  ]
+  ],
+  "dependencies": {
+    "workbox-webpack-plugin": "^7.1.0"
+  }
 }

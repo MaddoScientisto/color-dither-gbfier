@@ -3,6 +3,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { GenerateSW } = require('workbox-webpack-plugin');
+
 
 module.exports = () => ({
   resolve: {
@@ -12,6 +14,7 @@ module.exports = () => ({
     main: [
       path.join(process.cwd(), 'src', 'javascript', 'index.js'),
     ],
+    // 'service-worker': path.join(process.cwd(), 'src', 'javascript', 'service-worker.js'),
   },
   module: {
     rules: [
@@ -129,6 +132,9 @@ module.exports = () => ({
     new MiniCssExtractPlugin({
       filename: '[name].css',
       chunkFilename: '[id].css',
+    }),
+    new GenerateSW({
+      // swDest: '.dist/sw.js',
     }),
   ],
 });

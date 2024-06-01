@@ -32,10 +32,6 @@ module.exports = merge(common(), {
           from: path.join(process.cwd(), 'src', 'assets', 'pwa-assets'),
           to: path.join(process.cwd(), 'dist', 'pwa-assets'),
         },
-        {
-          from: path.join(process.cwd(), 'src', 'javascript', 'service-worker.js'),
-          to: path.join(process.cwd(), 'dist', 'service-worker.js'),
-        },
       ],
     }),
   ],
